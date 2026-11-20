@@ -71,3 +71,7 @@ SHA-256：53c485a390c7a93b8297d817a028045ee8708a18cbd9392094555cdd5814c5c5
 
 GPL-3.0。项目链接了 [brlaser](https://github.com/pdewacht/brlaser)（GPL-2.0-or-later）
 的编码核心，因此整体按 GPL-3.0 分发。IPP / HTTP 层为手写实现，无第三方依赖。
+
+---
+
+English README: <https://github.com/Corax-cz/Cprinter/blob/main/README.en.md>
