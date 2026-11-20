@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cprinter</string>
+    <!-- 系统设置 → 打印 里显示的服务名 -->
+    <string name="plugin_name">Cprinter</string>
+</resources>

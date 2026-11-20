@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    冷启动时的窗口底色（Android 11 及以下由 windowBackground 兜底；
+    Android 12+ 走 values-v31 里的 SplashScreen 属性，两边共用 splash_icon）。
+
+    尺寸刻意只给 84dp：以前直接吃 launcher 图标，系统把它铺满一大块，
+    位图被拉到糊（用户原话「都糊了」）。现在用矢量、且固定小尺寸，
+    放多大都是清晰的路径。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/splash_bg" />
+    <item
+        android:width="84dp"
+        android:height="84dp"
+        android:drawable="@drawable/ic_logo"
+        android:gravity="center" />
+</layer-list>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="true" />
+
+    <!-- IPP 服务器要监听 TCP，mDNS 广播要走组播，两个都需要 INTERNET -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--
+        自实现的 mDNS 响应器要持有 MulticastLock，否则 WiFi 固件会在熄屏后
+        丢掉 224.0.0.251 的组播包，表现是「屏幕亮着 iPhone 能搜到，一锁屏就搜不到」。
+    -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <!--
+        PrintService 握住 WifiLock(HIGH_PERF) + PARTIAL_WAKE_LOCK。
+        没有 WAKE_LOCK 这两把锁会抛 SecurityException，退到后台 20 秒后
+        8631/9101 就从局域网连不上了（详见 PrintService.acquireKeepAlive 的注释）。
+    -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- 常驻打印服务 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 开机恢复共享（只在用户上次是开着共享时） -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!--
+        后台保活设置页里要请求忽略电池优化。这个权限是系统级的特殊权限，
+        不授予也能用，只是用户得手动在系统设置里改。
+    -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Cprinter">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+        </activity>
+
+        <!--
+            foregroundServiceType 声明的顺序有含义，代码里也是按这个顺序尝试：
+            先 connectedDevice（语义最贴切：服务的就是一个 USB 外设），
+            在没有 USB 权限时它会抛异常，再退到 specialUse。
+            只有 connectedDevice 需要在启动时满足前置条件，specialUse 不需要。
+        -->
+        <service
+            android:name=".PrintService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice|specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Local IPP print server driving a USB-attached printer" />
+        </service>
+
+        <receiver
+            android:name=".BootReceiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <!--
+                    覆盖安装会把前台服务一起杀掉，而用户装完新版第一件事就是去
+                    手机/电脑的打印列表里找这台机器 —— 找不到就以为坏了。
+                    收到这条就按上次的意图把共享补起来。
+                -->
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <!--
+            Android 打印框架插件：让手机自己（WPS / 相册 / Chrome）也能打印。
+            与上面的 IPP 前台服务是两回事 —— 那个对外提供网络打印，这个对内接系统
+            打印界面。BIND_PRINT_SERVICE 由系统持有时才允许绑定，不要改成 false 以外的
+            导出配置：exported 必须为 true，否则系统找不到它。
+        -->
+        <service
+            android:name=".androidprint.UsbPrintPlugin"
+            android:exported="true"
+            android:label="@string/plugin_name"
+            android:permission="android.permission.BIND_PRINT_SERVICE">
+            <intent-filter>
+                <action android:name="android.printservice.PrintService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.printservice"
+                android:resource="@xml/printservice" />
+        </service>
+    </application>
+
+</manifest>

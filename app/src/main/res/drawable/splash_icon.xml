@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Android 12+ 系统 SplashScreen 的图标。
+
+    必须显式指定，否则系统会拿 launcher 图标（192px 位图）铺满屏幕中间那块，
+    又大又糊。这里固定 84dp 的矢量，视觉上就是一枚小 logo。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="84dp"
+        android:height="84dp"
+        android:drawable="@drawable/ic_logo"
+        android:gravity="center" />
+</layer-list>

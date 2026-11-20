@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>CawZen logo 矢量版</title>
+<style>
+  :root{
+    --bg:#111316; --card:#1a1d21; --line:#2a2f35;
+    --fg:#e8eaed; --dim:#9aa1a9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:15px/1.7 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:48px 28px 80px}
+  h1{font-size:26px;font-weight:600;margin:0 0 8px}
+  .sub{color:var(--dim);margin:0 0 36px;font-size:14px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+          padding:22px 24px 26px;margin-bottom:26px}
+  h2{font-size:17px;margin:0 0 4px;font-weight:600}
+  .meta{color:var(--dim);font-size:13px;margin:0 0 18px;font-family:ui-monospace,Consolas,monospace}
+  .row{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:16px}
+  .cell{background:#fff;border-radius:10px;height:240px;overflow:hidden;
+        display:flex;align-items:center;justify-content:center}
+  .cell.dark{background:#0b0c0e;border:1px solid var(--line)}
+  .cell img.fit{max-width:100%;max-height:210px;display:block}
+  .zoom{padding:0;position:relative;display:block;background:#fff}
+  .zoom img{position:absolute;max-width:none;display:block}
+  .tag{position:absolute;right:8px;bottom:6px;font-size:11px;color:#999;
+       background:rgba(255,255,255,.75);padding:1px 6px;border-radius:4px;z-index:2}
+  .cap{color:var(--dim);font-size:12px;margin-top:8px;text-align:center}
+  .cap b{color:var(--fg);font-weight:500}
+  .stack>*+*{margin-top:14px}
+  .note{color:var(--dim);font-size:13px;margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+  code{font-family:ui-monospace,Consolas,monospace;background:#24282d;padding:1px 6px;border-radius:4px;font-size:12px}
+  b{font-weight:600;color:var(--fg)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>CawZen logo 矢量版</h1>
+  <p class="sub">由 tools/vectrace.py 从位图重绘，纯路径 + 线性渐变，任意缩放都不糊。
+     第三列是把原图和矢量同时放大 4 倍看同一处细节。</p>
+
+  <section>
+    <h2>乌鸦 logo</h2>
+    <p class="meta">svg/乌鸦logo.svg · 29 KB · 1536×1440 · 单色 #000000 · 透明底</p>
+    <div class="row">
+      <figure style="margin:0">
+        <div class="cell"><img class="fit" src="src/乌鸦logo-原图.jpg" alt="原图"></div>
+        <figcaption class="cap"><b>原图</b> 位图 1536px</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="cell"><img class="fit" src="svg/乌鸦logo.svg" alt="矢量"></div>
+        <figcaption class="cap"><b>矢量</b> SVG</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="stack">
+          <div class="cell zoom">
+            <img src="src/乌鸦logo-原图.jpg" style="width:6144px;left:-4030px;top:-1195px">
+            <span class="tag">原图 4×</span>
+          </div>
+          <div class="cell zoom">
+            <img src="svg/乌鸦logo.svg" style="width:6144px;left:-4030px;top:-1195px">
+            <span class="tag">矢量 4×</span>
+          </div>
+        </div>
+        <figcaption class="cap">喙部细节（放大 4 倍）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>无线打印 logo · 渐变版</h2>
+    <p class="meta">svg/无线打印-渐变.svg · 24 KB · 1299×1211 · #000000 + 12 级灰度线性渐变 · 透明底</p>
+    <div class="row">
+      <figure style="margin:0">
+        <div class="cell"><img class="fit" src="src/无线打印-原图.jpg" alt="原图"></div>
+        <figcaption class="cap"><b>原图</b> 位图 1299px</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="cell"><img class="fit" src="svg/无线打印-渐变.svg" alt="矢量"></div>
+        <figcaption class="cap"><b>矢量</b> SVG</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="stack">
+          <div class="cell zoom">
+            <img src="src/无线打印-原图.jpg" style="width:5196px;left:-2230px;top:-1075px">
+            <span class="tag">原图 4×</span>
+          </div>
+          <div class="cell zoom">
+            <img src="svg/无线打印-渐变.svg" style="width:5196px;left:-2230px;top:-1075px">
+            <span class="tag">矢量 4×</span>
+          </div>
+        </div>
+        <figcaption class="cap">WiFi 弧线末端（放大 4 倍）</figcaption>
+      </figure>
+    </div>
+    <p class="note">WiFi 弧线和纸面横线的灰度是<b>真·线性渐变</b>（<code>linearGradient</code>），
+      不是把原图色块一层层堆出来，放到海报尺寸也不会有色阶断层。</p>
+  </section>
+
+  <section>
+    <h2>无线打印 logo · 单色版</h2>
+    <p class="meta">svg/无线打印-单色.svg · 40 KB · 1299×1211 · 纯 #000000 · 透明底</p>
+    <div class="row">
+      <figure style="margin:0">
+        <div class="cell"><img class="fit" src="svg/无线打印-单色.svg" alt="单色矢量"></div>
+        <figcaption class="cap"><b>单色</b> 矢量</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="cell dark"><img class="fit" src="svg/无线打印-单色.svg" alt="深底"></div>
+        <figcaption class="cap">深色底（背景透明）</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="cell"><img class="fit" src="src/无线打印-原图.jpg" alt="原图对照"></div>
+        <figcaption class="cap">原图对照</figcaption>
+      </figure>
+    </div>
+    <p class="note">单色版给激光打标、丝印、烫金这类只能用一种墨的工艺用。
+      弧线的灰度淡出在这种工艺里表达不了，所以末端是实心收口。</p>
+  </section>
+</div>
+</body>
+</html>

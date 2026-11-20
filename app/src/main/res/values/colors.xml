@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        自适应图标的底板色。白色 —— 新 logo 本身就是白底黑图（乌鸦 + Wi-Fi +
+        打印机 + 出纸），之前那套深色底配白剪影的做法会让桌面图标跟 logo
+        看起来不是一个东西。图形部分在 mipmap-*/ic_launcher_foreground.png，
+        由 tools/mkicon.py 从 tools/logo/logo-src.jpg 抠底生成，不改色。
+    -->
+    <color name="ic_launcher_background">#FFFFFF</color>
+
+    <!--
+        logo 的墨色。矢量文件 `ic_logo.xml` 用这个颜色名填充，而不是写死黑色 ——
+        启动页在深色模式下要白乌鸦，values-night 覆盖同一个名字就够了，
+        不用维护第二份 pathData。
+    -->
+    <color name="raven_ink">#14171C</color>
+
+    <!-- 启动页底色，与 Compose 主题里 Palette.bg 的浅色值保持一致（#F3F4F6）。 -->
+    <color name="splash_bg">#F3F4F6</color>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    插上 USB 打印机时让系统把本 App 拉到前台，并顺手弹出 USB 授权框。
+
+    这里只列两款会用到的厂商 ID，用意是「精准」而不是「能列的都要列」：
+      · 1273 = 0x04F9  Brother Industries
+      · 6127 = 0x17EF  联想（贴兄弟机芯的那批激光机）
+
+    不列 interface-class 为 7 的通用打印机，是因为那样插一台 HP / 佳能也会弹
+    "用哪个应用打开" —— 而本 App 在自动识别模式下驱动不了它们（brlaser 只认
+    兄弟机芯），弹出来只会让人以为能打。想用通用直通的人会在设置里手动选机型，
+    那条路不需要自动拉起。
+
+    反过来，不在这里列设备并不会影响识别：UsbManager.deviceList 是运行时枚举的，
+    与 intent-filter 无关。这个文件只决定「插上会不会自动弹 App」。
+-->
+<resources>
+    <usb-device vendor-id="1273" />
+    <usb-device vendor-id="6127" />
+</resources>

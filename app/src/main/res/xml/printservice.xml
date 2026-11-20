@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Android 打印框架的服务元数据。
+
+    两个要点，都踩过：
+    1. 属性**不带 android: 前缀**。这份 XML 由 PrintServiceInfo 用
+       `parser.getAttributeValue(null, "vendor")` 按无命名空间属性读取，
+       写成 android:vendor 能过编译，运行时却是 null。
+    2. 属性名是**驼峰**（addPrintersActivity），不是 manifest 那套短横线。
+       写成 add-printers-activity 不会报错，但系统读不到，dump 里该字段为空。
+-->
+<print-service
+    addPrintersActivity="com.cawzen.printserver.MainActivity"
+    vendor="Cawzen" />

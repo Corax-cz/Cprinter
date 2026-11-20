@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式：白乌鸦 / 深底，和界面 Palette.Dark 的 bg（#0C0F13）对齐。 -->
+    <color name="raven_ink">#E9EFF6</color>
+    <color name="splash_bg">#0C0F13</color>
+</resources>

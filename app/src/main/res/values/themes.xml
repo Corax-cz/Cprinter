@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    应用主题。父主题保持 Theme.DeviceDefault.NoActionBar 不变 —— 界面是 Compose
+    画的，平台主题只负责「窗口存在之前」那一帧。
+
+    这里唯一加的 windowBackground 是为了冷启动时别闪白：换成界面底色 + 一枚小 logo。
+    Android 12+ 的系统 SplashScreen 属性在 values-v31/themes.xml 里。
+-->
+<resources>
+    <style name="Theme.Cprinter" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
+</resources>
