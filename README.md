@@ -1,3 +1,5 @@
+**简体中文** · [English](README.en.md)
+
 Cprinter，把一部闲置 Android 手机变成 USB 打印机的无线 IPP/AirPrint 服务器。
 不需要 Root，不需要 CUPS，不需要在手机上跑 Linux。
 Windows、macOS、iOS、Android 都能把它当网络打印机用。
