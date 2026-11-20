@@ -1,7 +1,9 @@
-# 无线打印服务（安卓手机将仅有线usb打印机改造成无线打印机）
+Cprinter，把一部闲置 Android 手机变成 USB 打印机的无线 IPP/AirPrint 服务器。
+不需要 Root，不需要 CUPS，不需要在手机上跑 Linux。
+Windows、macOS、iOS、Android 都能把它当网络打印机用。
+（目前适用范围：1、支持原生渲染与 PCL/PostScript 直通的打印机。2、brlaser 覆盖的是 Brother 单色激光机芯及其贴牌机型。）
 
-把联想 LJ2600D（Brother HL-2240D 机芯，VID `0x17ef` / PID `0x5411`）通过 Android 手机
-的 USB OTG 变成局域网 IPP 打印机。
+已实现验证：把联想 LJ2600D（Brother HL-2240D 机芯）通过 Android 手机的 USB OTG 变成局域网 IPP 打印机。
 
 四层：IPP 服务器 → PDF 光栅化 → Native 编码核心（brlaser）→ USB Bulk 传输。
 
